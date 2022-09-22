@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/Header";
+import GridGame from "./components/GridGame";
+import shuffle from "./utils/shuffle";
 
 function App() {
+
+  const [cards, setCards] = useState(shuffle());
+
+  const handleClick = (card) => {
+    const newCards = cards.map((c) => {
+      if (c.id === card.id) {
+        return { ...c, visible: true };
+      }
+      return c;
+    });
+    setCards(newCards);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="grid-layout">
+      <Header />
+      <div className="left"></div>
+        <GridGame cards={cards} handleClick={handleClick}/>
+      <div className="right"></div>
     </div>
   );
 }

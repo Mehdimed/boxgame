@@ -1,0 +1,79 @@
+:root{
+  --base-transition: all 0.3s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header{
+  grid-area: header;
+  background-color: violet;
+  margin: 20px 10vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.grid-layout{
+  background-color: red;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "left grid-game right";
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 8fr;
+}
+
+
+.grid-game{
+  grid-area: grid-game;
+  background-color: yellow;
+  /* grille de 6 sur 4 */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 10px;
+
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid black;
+  margin: 10%;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out,transform 0.1s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.visible {
+  background-color: aliceblue;
+}
+
+
+.left{
+  grid-area: left;
+  background-color: green;
+}
+
+.right{
+  grid-area: right;
+  background-color: blue;
+}
+
