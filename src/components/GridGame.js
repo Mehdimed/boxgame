@@ -1,6 +1,7 @@
 import Card from './Card';
 
 function GridGame ({cards, handleClick}) {
+    console.log(cards);
 
     return (
             <div className="grid-game">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import GridGame from "./components/GridGame";
+import RewardList from "./components/RewardList";
 import shuffle from "./utils/shuffle";
 
 function App() {
@@ -17,12 +18,18 @@ function App() {
     setCards(newCards);
   }
 
+  const newGame = () => {
+    setCards(shuffle());
+  }
+
   return (
-    <div className="grid-layout">
-      <Header />
-      <div className="left"></div>
-        <GridGame cards={cards} handleClick={handleClick}/>
-      <div className="right"></div>
+    <div className="app">
+      <Header newgame={newGame}/>
+      <div className="row">
+          <RewardList position="left" cards={[...cards]}/>
+          <GridGame cards={cards} handleClick={handleClick}/>
+          <RewardList position="right" cards={[...cards]}/>
+      </div>
     </div>
   );
 }

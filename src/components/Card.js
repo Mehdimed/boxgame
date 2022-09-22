@@ -1,7 +1,11 @@
 function Card ({card, onClick}) {
     return (
-        <div className={card.visible ? "card visible" : "card"} onClick={onClick}>
-            {card.visible ? card.value + ' subs' : card.index}
+        <div className="card" onClick={onClick}>
+            <div className={card.visible && "selected"}>
+                <div className="card-face">{card.visible && card.value}</div>
+                <div className="card-back">{!card.visible && card.index}</div>
+            </div>
+
         </div>
     );
 }

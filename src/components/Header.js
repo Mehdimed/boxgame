@@ -1,8 +1,8 @@
-function Header () {
+function Header ({newgame}) {
     return (
             <div className="header">
                 <div>titre du jeu</div>
-                <button>Nouvelle partie</button>
+                <button onClick={() => newgame()} >Nouvelle partie</button>
             </div>
     );
 }

@@ -1,5 +1,27 @@
-:root{
-  --base-transition: all 0.3s ease-in-out;
+:root {
+  --text: #202426;
+  --card: linear-gradient(135deg, #fb59dd, #f99ee8);
+  --orange: #ffa200;
+  --bg: linear-gradient(135deg, #32d653, #a4ff85);
+
+  --delay: 200ms;
+  --rotate-0: rotateY(0deg);
+  --rotate-90: rotateY(90deg);
+  --transition: all ease-in 200ms;
+
+  --radius: 0.75rem;
+  --shadow: 2px 2px 10px #03030390;
+
+  --card-width: 8vw;
+  --card-height: 5vw;
+  --card-width-mobile: 20vw;
+  --card-width-large: 160px;
+  --card-enter: enter 600ms ease;
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    sans-serif;
+
+  font-size: 1rem;
 }
 
 *,
@@ -14,8 +36,24 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
+.app {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  color: var(--text);
+}
+
+/* -----utils------- */
+.row {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  flex: 1;
+}
+
 .header{
-  grid-area: header;
   background-color: violet;
   margin: 20px 10vw;
   display: flex;
@@ -24,22 +62,8 @@ html {
   justify-content: space-around;
 }
 
-.grid-layout{
-  background-color: red;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-areas:
-    "header header header"
-    "left grid-game right";
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 8fr;
-}
-
-
 .grid-game{
-  grid-area: grid-game;
-  background-color: yellow;
+  flex: 1;
   /* grille de 6 sur 4 */
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -47,33 +71,90 @@ html {
   grid-gap: 10px;
 
 }
+ /* --------------- card ------------------- */
+ .card {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  animation: var(--card-enter);
+  border-radius: var(--radius);
+}
 
-.card {
+.card-face,
+.card-back {
+  padding: 1rem;
+  width: var(--card-width);
+  height: var(--card-height);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid black;
-  margin: 10%;
+}
+.card-face {
+  position: absolute;
+  transform: var(--rotate-90);
+  background: var(--card);
+  font-size: 3rem;
+  color: #FFF;
+}
+.card-back {
   cursor: pointer;
-  transition: background-color 0.5s ease-in-out,transform 0.1s ease-in-out;
+  transform: var(--rotate-0);
+  transition-delay: var(--delay);
+  background: var(--card);
+  font-size: 2rem;
+}
+.selected .card-face {
+  transform: var(--rotate-0);
+  transition-delay: var(--delay);
+}
+.selected .card-back {
+  transform: var(--rotate-90);
+  transition-delay: 0s;
+}
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.card:hover {
-  transform: scale(1.1);
+.left,.right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 15vw;
 }
 
-.visible {
-  background-color: aliceblue;
+/* .left children */*
+.left > .reward{
+  background: linear-gradient(135deg, #2f47fc, #4592ff);
+}
+
+.right > .reward{
+  background: linear-gradient(135deg, #e92828, #fb4f4f);
+}
+
+.reward{
+  display: flex;
+  justify-content: center;
+  width: 13vw;
+  border-radius: 5px;
+  transition: all 0.5s ease 0.5s;
+} 
+
+.eliminate{
+  filter: grayscale(100%);
 }
 
 
-.left{
-  grid-area: left;
-  background-color: green;
-}
-
-.right{
-  grid-area: right;
-  background-color: blue;
-}
 
